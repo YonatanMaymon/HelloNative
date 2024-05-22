@@ -2,23 +2,20 @@
 
 import React from 'react';
 import { Button, View, Text } from 'react-native';
-import { StackNavigationProp } from '@react-navigation/stack';
-import { RootStackParamList } from '../navigation/AppNavigator';
+import { increment, decrement, incrementByAmount } from '../redux/slices';
+import { useAppDispatch, useAppSelector } from '../hooks/redux.hook';
 
-type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Home'>;
+const HomeScreen: React.FC = () => {
+  const dispatch = useAppDispatch();
+  const count = useAppSelector((state) => state.counter.value);
 
-type Props = {
-  navigation: HomeScreenNavigationProp;
-};
-
-const HomeScreen: React.FC<Props> = ({ navigation }) => {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Home Screen</Text>
-      <Button
-        title="Go to Details"
-        onPress={() => navigation.navigate('Details', { itemId: 42 })}
-      />
+      <Text>Count: {count}</Text>
+      <Button title="Increment" onPress={() => dispatch(increment())} />
+      <Button title="Decrement" onPress={() => dispatch(decrement())} />
+      <Button title="Increment by 5" onPress={() => dispatch(incrementByAmount(5))} />
     </View>
   );
 };

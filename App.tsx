@@ -1,25 +1,20 @@
-// App.tsx
-
-import React from 'react';
-import { SafeAreaView, StyleSheet } from 'react-native';
-import { Provider } from 'react-redux';
+import * as React from 'react';
+import { Provider as ReduxProvider } from 'react-redux';
+import { Provider as PaperProvider } from 'react-native-paper';
+import { SafeAreaView} from 'react-native';
 import AppNavigator from './src/navigation/AppNavigator';
 import store from './src/redux/store';
 
 const App = () => {
   return (
-    <Provider store={store}>
-      <SafeAreaView style={styles.container}>
-        <AppNavigator />
-      </SafeAreaView>
-    </Provider>
+    <ReduxProvider store={store}>
+      <PaperProvider>
+        <SafeAreaView style={{flex:1}}>
+          <AppNavigator />
+        </SafeAreaView>
+      </PaperProvider>
+    </ReduxProvider>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});
 
 export default App;

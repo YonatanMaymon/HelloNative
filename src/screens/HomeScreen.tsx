@@ -12,7 +12,7 @@ import { useAppDispatch, useAppSelector } from '../hooks/redux.hook';
 const HomeScreen: React.FC = () => {
   const dispatch = useAppDispatch();
   const count = useAppSelector(
-    (state: { global: { value: number } }) => state.global.value
+    (state: { global: { value: number } }) => state.global.value,
   );
 
   return (

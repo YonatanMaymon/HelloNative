@@ -2,12 +2,9 @@
 
 import React from 'react';
 import { View, Text } from 'react-native';
-import { StackScreenProps } from '@react-navigation/stack';
-import { RootStackParamList } from '../navigation/AppNavigator';
+import { DetailsScreenProps } from '../../navigation/nav.types';
 
-type Props = StackScreenProps<RootStackParamList, 'Details'>;
-
-const DetailsScreen: React.FC<Props> = ({ route }) => {
+const DetailsScreen: React.FC<DetailsScreenProps> = ({ route }) => {
   const { itemId } = route.params;
 
   return (

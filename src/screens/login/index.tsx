@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
-import { useAppDispatch } from '../hooks/redux.hook';
-import { login } from '../redux/slices/auth';
+import { useAppDispatch } from '../../hooks/redux.hook';
+import { login } from '../../redux/slices/auth';
+import { LoginScreenProps } from '../../navigation/nav.types';
 
-const LoginScreen: React.FC = () => {
+const LoginScreen: React.FC<LoginScreenProps> = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const dispatch = useAppDispatch();

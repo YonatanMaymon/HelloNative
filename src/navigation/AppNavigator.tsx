@@ -3,16 +3,13 @@
 import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import HomeScreen from '../screens/HomeScreen';
-import DetailsScreen from '../screens/DetailsScreen';
+import HomeScreen from '../screens/homeScreen';
+import DetailsScreen from '../screens/details';
+import WelcomeScreen from '../screens/wellcome';
 import { useAppSelector } from '../hooks/redux.hook';
-import LoginScreen from '../screens/Login';
-
-export type RootStackParamList = {
-  Home: undefined;
-  Details: { itemId: number };
-  Login: undefined;
-};
+import LoginScreen from '../screens/login';
+import SignUpScreen from '../screens/singup';
+import { RootStackParamList } from './nav.types';
 
 const Stack = createStackNavigator<RootStackParamList>();
 
@@ -28,7 +25,11 @@ const AppNavigator = () => {
             <Stack.Screen name="Details" component={DetailsScreen} />
           </>
         ) : (
-          <Stack.Screen name="Login" component={LoginScreen} />
+          <>
+            <Stack.Screen name="Welcome" component={WelcomeScreen} />
+            <Stack.Screen name="Login" component={LoginScreen} />
+            <Stack.Screen name="SignUp" component={SignUpScreen} />
+          </>
         )}
       </Stack.Navigator>
     </NavigationContainer>

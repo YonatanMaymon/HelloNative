@@ -1,15 +1,26 @@
 // src/screens/WelcomeScreen.tsx
 
 import React from 'react';
-import { View, Text, Button, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import { WelcomeScreenProps } from '../../navigation/nav.types';
+import CustomButton from '../../components/buttons/CustomButton';
 
 const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Welcome to the App</Text>
-      <Button title="Login" onPress={() => navigation.navigate('Login')} />
-      <Button title="Sign Up" onPress={() => navigation.navigate('SignUp')} />
+      <CustomButton
+        mode="contained"
+        onPress={() => navigation.navigate('Login')}
+      >
+        Login
+      </CustomButton>
+      <CustomButton
+        mode="contained"
+        onPress={() => navigation.navigate('SignUp')}
+      >
+        Sign Up
+      </CustomButton>
     </View>
   );
 };

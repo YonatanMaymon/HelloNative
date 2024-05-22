@@ -1,14 +1,15 @@
-// src/components/CustomButton.tsx
+// src/components/PrimaryButton.tsx
 
 import React from 'react';
 import { Button, ButtonProps, useTheme } from 'react-native-paper';
 import { StyleSheet } from 'react-native';
 
-const CustomButton: React.FC<ButtonProps> = (props) => {
+const PrimaryButton: React.FC<ButtonProps> = (props) => {
   const theme = useTheme();
 
   return (
     <Button
+      mode="contained"
       {...props}
       style={[
         styles.button,
@@ -36,4 +37,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CustomButton;
+export default PrimaryButton;

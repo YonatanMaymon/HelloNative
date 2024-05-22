@@ -3,6 +3,7 @@
 import React from 'react';
 import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 import { SignUpScreenProps } from '../../navigation/nav.types';
+import PrimaryButton from '../../components/buttons/primary';
 
 const SignUpScreen: React.FC<SignUpScreenProps> = ({ navigation }) => {
   return (
@@ -15,12 +16,7 @@ const SignUpScreen: React.FC<SignUpScreenProps> = ({ navigation }) => {
         placeholder="Confirm Password"
         secureTextEntry
       />
-      <Button
-        title="Sign Up"
-        onPress={() => {
-          /* handle sign up */
-        }}
-      />
+      <PrimaryButton onPress={() => {}}>Sign Up</PrimaryButton>
     </View>
   );
 };

@@ -2,12 +2,12 @@
 
 import React from 'react';
 import { Button, View, Text } from 'react-native';
-import { increment, decrement, incrementByAmount } from '../redux/slices';
+import { increment, decrement, incrementByAmount } from '../redux/slices/global';
 import { useAppDispatch, useAppSelector } from '../hooks/redux.hook';
 
 const HomeScreen: React.FC = () => {
   const dispatch = useAppDispatch();
-  const count = useAppSelector((state) => state.counter.value);
+  const count = useAppSelector((state) => state.global.value);
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>

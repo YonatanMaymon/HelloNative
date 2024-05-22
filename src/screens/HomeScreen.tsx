@@ -2,12 +2,18 @@
 
 import React from 'react';
 import { Button, View, Text } from 'react-native';
-import { increment, decrement, incrementByAmount } from '../redux/slices/global';
+import {
+  increment,
+  decrement,
+  incrementByAmount,
+} from '../redux/slices/global';
 import { useAppDispatch, useAppSelector } from '../hooks/redux.hook';
 
 const HomeScreen: React.FC = () => {
   const dispatch = useAppDispatch();
-  const count = useAppSelector((state) => state.global.value);
+  const count = useAppSelector(
+    (state: { global: { value: number } }) => state.global.value
+  );
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -15,7 +21,10 @@ const HomeScreen: React.FC = () => {
       <Text>Count: {count}</Text>
       <Button title="Increment" onPress={() => dispatch(increment())} />
       <Button title="Decrement" onPress={() => dispatch(decrement())} />
-      <Button title="Increment by 5" onPress={() => dispatch(incrementByAmount(5))} />
+      <Button
+        title="Increment by 5"
+        onPress={() => dispatch(incrementByAmount(5))}
+      />
     </View>
   );
 };

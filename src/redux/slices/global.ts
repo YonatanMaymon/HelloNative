@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface IGlobal {
-  value: number
+  value: number;
 }
 
 const initialState: IGlobal = {

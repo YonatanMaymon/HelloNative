@@ -11,7 +11,7 @@ import LoginScreen from '../screens/Login';
 export type RootStackParamList = {
   Home: undefined;
   Details: { itemId: number };
-  Login: undefined
+  Login: undefined;
 };
 
 const Stack = createStackNavigator<RootStackParamList>();
@@ -32,7 +32,7 @@ const AppNavigator = () => {
         )}
       </Stack.Navigator>
     </NavigationContainer>
-  )
+  );
 };
 
 export default AppNavigator;

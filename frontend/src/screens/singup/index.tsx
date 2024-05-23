@@ -11,7 +11,9 @@ const SignUpScreen: React.FC<SignUpScreenProps> = ({ navigation }) => {
   const [password, setPassword] = useState('');
   const handleSignUp = async () => {
     try {
-      await signUp({ username, password });
+      console.log('sending a singUp request');
+      const res = await signUp({ username: username, password: password });
+      console.log(res);
       alert('User registered successfully');
     } catch (error) {
       console.error(error);
@@ -22,7 +24,7 @@ const SignUpScreen: React.FC<SignUpScreenProps> = ({ navigation }) => {
       <Text style={styles.title}>Sign Up</Text>
       <TextInput
         style={styles.input}
-        placeholder="Email"
+        placeholder="Username"
         value={username}
         onChangeText={setUsername}
       />

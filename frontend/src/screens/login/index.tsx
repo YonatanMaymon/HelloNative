@@ -13,7 +13,7 @@ const LoginScreen: React.FC<LoginScreenProps> = () => {
 
   const handleLogIn = async () => {
     try {
-      const { data } = await logIn({ username, password });
+      const { data } = await logIn({ username: username, password: password });
       console.log('Logged in', data);
       dispatch(login(username));
     } catch (error) {

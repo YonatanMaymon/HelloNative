@@ -7,16 +7,22 @@ const router = Router();
 
 router.post("/signup", async (req, res) => {
   const { username, password } = req.body;
+  if (!username || !password) {
+    res.status(500).send("no username or password");
+    console.error("no password or username");
+  }
   try {
     const hashedPassword = await bcrypt.hash(password, 10);
     const newUser = await User.create({ username, password: hashedPassword });
     res.status(201).send("User created");
   } catch (error) {
+    console.error(error);
     res.status(500).send(error);
   }
 });
 
 router.post("/login", async (req, res) => {
+  console.log("asd");
   const { username, password } = req.body;
   try {
     const user = await User.findOne({ where: { username } });

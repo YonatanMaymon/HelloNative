@@ -4,15 +4,20 @@ import { useAppDispatch } from '../../hooks/redux.hook';
 import { login } from '../../redux/slices/auth';
 import { LoginScreenProps } from '../../navigation/nav.types';
 import { Button } from 'react-native-paper';
+import { logIn } from '../../api/api';
 
 const LoginScreen: React.FC<LoginScreenProps> = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const dispatch = useAppDispatch();
 
-  const handleLogin = () => {
-    if (username && password) {
+  const handleLogIn = async () => {
+    try {
+      const { data } = await logIn({ username, password });
+      console.log('Logged in', data);
       dispatch(login(username));
+    } catch (error) {
+      console.error(error);
     }
   };
 
@@ -32,7 +37,7 @@ const LoginScreen: React.FC<LoginScreenProps> = () => {
         value={password}
         onChangeText={setPassword}
       />
-      <Button onPress={handleLogin}>Login</Button>
+      <Button onPress={handleLogIn}>Login</Button>
     </View>
   );
 };

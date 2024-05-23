@@ -1,9 +1,9 @@
 import express from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
-import sequelize from "./config/database";
-import User from "./models/User";
-import authRoutes from "./routes/auth";
+import sequelize from "./src/config/database";
+import User from "./src/models/User";
+import authRoutes from "./src/routes/auth";
 
 const app = express();
 const port = process.env.PORT || 5000;

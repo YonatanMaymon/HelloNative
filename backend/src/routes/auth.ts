@@ -7,17 +7,27 @@ const router = Router();
 
 router.post("/signup", async (req, res) => {
   const { username, password } = req.body;
-  if (!username || !password) {
-    res.status(500).send("no username or password");
-    console.error("no password or username");
-  }
+
   try {
+    // Check if the user already exists
+    const existingUser = await User.findOne({ where: { username } });
+    if (existingUser) {
+      return res.status(400).json({ error: "User already exists" });
+    }
+
+    // Hash the password
     const hashedPassword = await bcrypt.hash(password, 10);
+
+    // Create a new user
     const newUser = await User.create({ username, password: hashedPassword });
-    res.status(201).send("User created");
+
+    // Send a success response
+    res
+      .status(201)
+      .json({ message: "User created successfully", user: newUser });
   } catch (error) {
     console.error(error);
-    res.status(500).send(error);
+    res.status(500).json({ error: "Internal server error" });
   }
 });
 

@@ -1,22 +1,32 @@
-// src/screens/SignUpScreen.tsx
-
 import React, { useState } from 'react';
 import { View, Text, TextInput, StyleSheet } from 'react-native';
 import { SignUpScreenProps } from '../../navigation/nav.types';
 import { Button } from 'react-native-paper';
 import { signUp } from '../../api/api';
+import axios from 'axios';
+import {
+  signUpFailedAlert,
+  signUpSuccessfulAlert,
+  userAllReadyExistAlert,
+} from '../../constants/alerts';
 
 const SignUpScreen: React.FC<SignUpScreenProps> = ({ navigation }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const handleSignUp = async () => {
     try {
-      console.log('sending a singUp request');
-      const res = await signUp({ username: username, password: password });
-      console.log(res);
-      alert('User registered successfully');
+      console.log('Sending a sign-up request with:', { username, password });
+      const response = await signUp({ username, password });
+      console.log('Sign-up response received:', response);
+      signUpSuccessfulAlert();
     } catch (error) {
-      console.error(error);
+      if (axios.isAxiosError(error) && error.response?.status === 400) {
+        userAllReadyExistAlert();
+        console.log('user already exist');
+      } else {
+        signUpFailedAlert();
+        console.error('Sign-up error:', error);
+      }
     }
   };
   return (

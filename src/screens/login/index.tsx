@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+import { View, Text, TextInput, StyleSheet } from 'react-native';
 import { useAppDispatch } from '../../hooks/redux.hook';
 import { login } from '../../redux/slices/auth';
 import { LoginScreenProps } from '../../navigation/nav.types';
-import PrimaryButton from '../../components/buttons/primary';
+import { Button } from 'react-native-paper';
 
 const LoginScreen: React.FC<LoginScreenProps> = () => {
   const [username, setUsername] = useState('');
@@ -32,7 +32,7 @@ const LoginScreen: React.FC<LoginScreenProps> = () => {
         value={password}
         onChangeText={setPassword}
       />
-      <PrimaryButton onPress={handleLogin}>Login</PrimaryButton>
+      <Button onPress={handleLogin}>Login</Button>
     </View>
   );
 };

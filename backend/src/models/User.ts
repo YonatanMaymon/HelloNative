@@ -9,6 +9,7 @@ interface UserAttributes {
 
 interface UserCreationAttributes extends Optional<UserAttributes, "id"> {}
 
+/**defines the users tabel in db*/
 class User
   extends Model<UserAttributes, UserCreationAttributes>
   implements UserAttributes

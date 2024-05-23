@@ -23,6 +23,7 @@ router.post("/login", async (req, res) => {
     if (!user) return res.status(400).send("User not found");
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) return res.status(400).send("Invalid credentials");
+    /**a jwt token to authenticate the client for an hour*/
     const token = jwt.sign({ id: user.id }, "your_jwt_secret", {
       expiresIn: "1h",
     });

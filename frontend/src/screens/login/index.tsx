@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, StyleSheet } from 'react-native';
+import { View, Text, TextInput, StyleSheet, Alert } from 'react-native';
 import { useAppDispatch } from '../../hooks/redux.hook';
 import { login } from '../../redux/slices/auth';
 import { LoginScreenProps } from '../../navigation/nav.types';
 import { Button } from 'react-native-paper';
 import { logIn } from '../../api/api';
+import axios from 'axios';
+import { handleAxiosError } from '../../utils/errorHandler';
 
 const LoginScreen: React.FC<LoginScreenProps> = () => {
   const [username, setUsername] = useState('');
@@ -17,7 +19,7 @@ const LoginScreen: React.FC<LoginScreenProps> = () => {
       console.log('Logged in', data);
       dispatch(login(username));
     } catch (error) {
-      console.error(error);
+      handleAxiosError(error);
     }
   };
 

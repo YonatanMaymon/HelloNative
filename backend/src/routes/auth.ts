@@ -12,7 +12,7 @@ router.post("/signup", async (req, res) => {
     // Check if the user already exists
     const existingUser = await User.findOne({ where: { username } });
     if (existingUser) {
-      return res.status(400).json({ error: "User already exists" });
+      return res.status(400).send("User already exists");
     }
 
     // Hash the password
@@ -22,12 +22,10 @@ router.post("/signup", async (req, res) => {
     const newUser = await User.create({ username, password: hashedPassword });
 
     // Send a success response
-    res
-      .status(201)
-      .json({ message: "User created successfully", user: newUser });
+    res.status(201).send("User created successfully");
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: "Internal server error" });
+    res.status(500).send("Internal server error");
   }
 });
 

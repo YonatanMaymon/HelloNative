@@ -1,14 +1,11 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, StyleSheet } from 'react-native';
+import { View, Text, TextInput, StyleSheet, Alert } from 'react-native';
 import { SignUpScreenProps } from '../../navigation/nav.types';
 import { Button } from 'react-native-paper';
 import { signUp } from '../../api/api';
 import axios from 'axios';
-import {
-  signUpFailedAlert,
-  signUpSuccessfulAlert,
-  userAllReadyExistAlert,
-} from '../../constants/alerts';
+import { signUpSuccessfulAlert } from '../../constants/alerts';
+import { handleAxiosError } from '../../utils/errorHandler';
 
 const SignUpScreen: React.FC<SignUpScreenProps> = ({ navigation }) => {
   const [username, setUsername] = useState('');
@@ -20,13 +17,7 @@ const SignUpScreen: React.FC<SignUpScreenProps> = ({ navigation }) => {
       console.log('Sign-up response received:', response);
       signUpSuccessfulAlert();
     } catch (error) {
-      if (axios.isAxiosError(error) && error.response?.status === 400) {
-        userAllReadyExistAlert();
-        console.log('user already exist');
-      } else {
-        signUpFailedAlert();
-        console.error('Sign-up error:', error);
-      }
+      handleAxiosError(error);
     }
   };
   return (

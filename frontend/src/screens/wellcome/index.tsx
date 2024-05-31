@@ -4,13 +4,16 @@ import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { WelcomeScreenProps } from '../../navigation/nav.types';
 import { Button, Text } from 'react-native-paper';
+import JumpingItem from '../../components/jumpingItem';
 
 const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ navigation }) => {
   return (
     <View style={styles.container}>
-      <Text variant="displayLarge" style={styles.title}>
-        Welcome
-      </Text>
+      <JumpingItem offset={{ y: 20 }}>
+        <Text variant="displayLarge" style={styles.title}>
+          HelloNative!
+        </Text>
+      </JumpingItem>
       <View>
         <Button
           mode="contained"

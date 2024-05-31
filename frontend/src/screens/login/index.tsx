@@ -1,23 +1,35 @@
-import React, { useState } from 'react';
-import { View, Text, TextInput, StyleSheet, Alert } from 'react-native';
+import React from 'react';
+import { View, Text, TextInput } from 'react-native';
+import { useForm, Controller } from 'react-hook-form';
 import { useAppDispatch } from '../../hooks/redux.hook';
 import { login } from '../../redux/slices/auth';
 import { LoginScreenProps } from '../../navigation/nav.types';
 import { Button } from 'react-native-paper';
 import { logIn } from '../../api/api';
-import axios from 'axios';
 import { handleAxiosError } from '../../utils/errorHandler';
+import { styles } from './styles';
+
+type FormData = {
+  username: string;
+  password: string;
+};
 
 const LoginScreen: React.FC<LoginScreenProps> = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormData>();
   const dispatch = useAppDispatch();
 
-  const handleLogIn = async () => {
+  const handleLogIn = async (data: FormData) => {
     try {
-      const { data } = await logIn({ username: username, password: password });
-      console.log('Logged in', data);
-      dispatch(login(username));
+      const response = await logIn({
+        username: data.username,
+        password: data.password,
+      });
+      console.log('Logged in', response.data);
+      dispatch(login(response.data.username));
     } catch (error) {
       handleAxiosError(error);
     }
@@ -26,42 +38,53 @@ const LoginScreen: React.FC<LoginScreenProps> = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Login</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Username"
-        value={username}
-        onChangeText={setUsername}
+
+      <Controller
+        control={control}
+        rules={{
+          required: 'Username is required',
+        }}
+        render={({ field: { onChange, onBlur, value } }) => (
+          <TextInput
+            style={styles.input}
+            placeholder="Username"
+            onBlur={onBlur}
+            onChangeText={onChange}
+            value={value}
+          />
+        )}
+        name="username"
       />
-      <TextInput
-        style={styles.input}
-        placeholder="Password"
-        secureTextEntry
-        value={password}
-        onChangeText={setPassword}
+      {errors.username && (
+        <Text style={styles.errorText}>{errors.username.message}</Text>
+      )}
+
+      <Controller
+        control={control}
+        rules={{
+          required: 'Password is required',
+        }}
+        render={({ field: { onChange, onBlur, value } }) => (
+          <TextInput
+            style={styles.input}
+            placeholder="Password"
+            secureTextEntry
+            onBlur={onBlur}
+            onChangeText={onChange}
+            value={value}
+          />
+        )}
+        name="password"
       />
-      <Button onPress={handleLogIn}>Login</Button>
+      {errors.password && (
+        <Text style={styles.errorText}>{errors.password.message}</Text>
+      )}
+
+      <Button mode="contained" onPress={handleSubmit(handleLogIn)}>
+        Login
+      </Button>
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    padding: 16,
-  },
-  title: {
-    fontSize: 24,
-    marginBottom: 16,
-    textAlign: 'center',
-  },
-  input: {
-    height: 40,
-    borderColor: 'gray',
-    borderWidth: 1,
-    marginBottom: 12,
-    paddingHorizontal: 8,
-  },
-});
 
 export default LoginScreen;

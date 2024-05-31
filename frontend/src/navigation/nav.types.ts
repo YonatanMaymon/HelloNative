@@ -4,16 +4,16 @@ import { StackScreenProps } from '@react-navigation/stack';
 
 export type RootStackParamList = {
   Home: undefined;
-  Details: { itemId: number };
+  Profile: undefined;
   Login: undefined;
   Welcome: undefined;
   SignUp: undefined;
 };
 
 export type HomeScreenProps = StackScreenProps<RootStackParamList, 'Home'>;
-export type DetailsScreenProps = StackScreenProps<
+export type ProfileScreenProps = StackScreenProps<
   RootStackParamList,
-  'Details'
+  'Profile'
 >;
 export type LoginScreenProps = StackScreenProps<RootStackParamList, 'Login'>;
 export type WelcomeScreenProps = StackScreenProps<

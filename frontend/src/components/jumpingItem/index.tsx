@@ -10,9 +10,12 @@ interface JumpingItemProps {
   children: ReactNode;
   style?: object;
   offset?: { x?: number; y?: number };
-  jumpingDuration?: number;
+  jumpingDuration?: { x?: number; y?: number };
 }
-
+/**make the appearance of jumping
+ * @param offset - enter an object with x and y values to choose the offset of the jump
+ * @param jumpingDuration - enter an object with x and y values to choose the speed of the movement on the axis
+ */
 const JumpingItem: React.FC<JumpingItemProps> = ({
   children,
   style,
@@ -22,10 +25,10 @@ const JumpingItem: React.FC<JumpingItemProps> = ({
   const offsetX = useSharedValue(0);
   const offsetY = useSharedValue(0);
 
-  const getJumpWithRepeat = (offset?: number) => {
+  const getJumpWithRepeat = (offset?: number, duration?: number) => {
     return withRepeat(
       withTiming(offset || 0, {
-        duration: jumpingDuration || 500,
+        duration: duration || 500,
       }),
       -1,
       true
@@ -33,8 +36,8 @@ const JumpingItem: React.FC<JumpingItemProps> = ({
   };
 
   useEffect(() => {
-    offsetX.value = getJumpWithRepeat(offset?.x);
-    offsetY.value = getJumpWithRepeat(offset?.y);
+    offsetX.value = getJumpWithRepeat(offset?.x, jumpingDuration?.x);
+    offsetY.value = getJumpWithRepeat(offset?.y, jumpingDuration?.y);
   }, [offsetX, offsetY]);
 
   const animatedStyle = useAnimatedStyle(() => {

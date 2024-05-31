@@ -8,6 +8,7 @@ import { Button } from 'react-native-paper';
 import { logIn } from '../../api/api';
 import { handleAxiosError } from '../../utils/errorHandler';
 import { styles } from './styles';
+import CustomInput from '../../components/primaryInputField';
 
 type FormData = {
   username: string;
@@ -45,8 +46,7 @@ const LoginScreen: React.FC<LoginScreenProps> = () => {
           required: 'Username is required',
         }}
         render={({ field: { onChange, onBlur, value } }) => (
-          <TextInput
-            style={styles.input}
+          <CustomInput
             placeholder="Username"
             onBlur={onBlur}
             onChangeText={onChange}
@@ -65,8 +65,7 @@ const LoginScreen: React.FC<LoginScreenProps> = () => {
           required: 'Password is required',
         }}
         render={({ field: { onChange, onBlur, value } }) => (
-          <TextInput
-            style={styles.input}
+          <CustomInput
             placeholder="Password"
             secureTextEntry
             onBlur={onBlur}

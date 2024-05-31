@@ -7,6 +7,7 @@ import { signUp } from '../../api/api';
 import { signUpSuccessfulAlert } from '../../constants/alerts';
 import { handleAxiosError } from '../../utils/errorHandler';
 import { styles } from './styles';
+import CustomInput from '../../components/primaryInputField';
 
 type FormData = {
   username: string;
@@ -50,8 +51,7 @@ const SignUpScreen: React.FC<SignUpScreenProps> = ({ navigation }) => {
           },
         }}
         render={({ field: { onChange, onBlur, value } }) => (
-          <TextInput
-            style={styles.input}
+          <CustomInput
             placeholder="Username"
             onBlur={onBlur}
             onChangeText={onChange}
@@ -74,8 +74,7 @@ const SignUpScreen: React.FC<SignUpScreenProps> = ({ navigation }) => {
           },
         }}
         render={({ field: { onChange, onBlur, value } }) => (
-          <TextInput
-            style={styles.input}
+          <CustomInput
             placeholder="Password"
             secureTextEntry
             onBlur={onBlur}
@@ -97,8 +96,7 @@ const SignUpScreen: React.FC<SignUpScreenProps> = ({ navigation }) => {
             value === getValues('password') || 'Passwords do not match',
         }}
         render={({ field: { onChange, onBlur, value } }) => (
-          <TextInput
-            style={styles.input}
+          <CustomInput
             placeholder="Confirm Password"
             secureTextEntry
             onBlur={onBlur}

@@ -13,7 +13,10 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
         justifyContent: 'space-around',
       }}
     >
-      <JumpingItem offset={{ y: 10, x: 5 }} jumpingDuration={{ x: 100 }}>
+      <JumpingItem
+        offset={{ y: 5, x: 2 }}
+        jumpingDuration={{ x: 2000, y: 1000 }}
+      >
         <Text variant="displayLarge">Home</Text>
       </JumpingItem>
       <Button

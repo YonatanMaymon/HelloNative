@@ -2,6 +2,7 @@ import { Router } from "express";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import User from "../models/User";
+import UserData from "../models/UserData";
 
 const router = Router();
 
@@ -20,6 +21,11 @@ router.post("/signup", async (req, res) => {
 
     // Create a new user
     const newUser = await User.create({ username, password: hashedPassword });
+
+    //create user data
+    const newUserData = await UserData.create({
+      userId: newUser.id,
+    });
 
     // Send a success response
     res.status(201).send("User created successfully");

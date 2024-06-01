@@ -2,7 +2,6 @@ import express from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
 import sequelize from "./src/config/database";
-import User from "./src/models/User";
 import authRoutes from "./src/routes/auth";
 
 const app = express();
